@@ -89,13 +89,13 @@ public class KotlinFormatter : CodeFormatter {
             switch format {
             case let .format(format):
                 switch format {
-                case .binary: return "File"
-                case .byte: return "File"
+                case .binary: return "java.io.File"
+                case .byte: return "java.io.File"
                 case .base64: return "String"
-                case .dateTime: return "LocalDateTime"
-                case .date: return "LocalDate"
+                case .dateTime: return dateTimeType == "" ? "java.time.LocalDate" : dateTimeType
+                case .date: return dateTimeType == "" ? "java.time.LocalDate" : dateTimeType
                 case .email, .hostname, .ipv4, .ipv6, .password: return "String"
-                case .uri: return "URL"
+                case .uri: return "java.net.URL"
                 case .uuid: return "java.util.UUID"
                 }
             case .other: return "String"
@@ -194,9 +194,9 @@ public class KotlinFormatter : CodeFormatter {
     func getEncodedValue(name: String, type: String) -> String {
         var encodedValue = name
 
-        let jsonTypes = ["Any", "Map<String: Any>", "Int", "String", "Float", "Double", "Boolean"]
+        let jsonTypes = ["Any", "Map<String, Any>", "Int", "String", "Float", "Double", "Boolean"]
 
-        if !jsonTypes.contains(type), !jsonTypes.map({ "List<\($0)>" }).contains(type), !jsonTypes.map({ "Map<String: \($0)>" }).contains(type) {
+        if !jsonTypes.contains(type), !jsonTypes.map({ "List<\($0)>" }).contains(type), !jsonTypes.map({ "Map<String, \($0)>" }).contains(type) {
             if type.hasPrefix("[[") {
                 encodedValue += ".map { x -> x.encode() }"
             } else if type.hasPrefix("Map<String: List<") {

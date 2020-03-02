@@ -15,6 +15,7 @@ public class CodeFormatter {
     var modelNames: [String: String]
     var enumNames: [String: String]
     var propertyNames: [String: String]
+    var dateTimeType: String
 
     public init(spec: SwaggerSpec, templateConfig: TemplateConfig) {
         self.spec = spec
@@ -25,6 +26,7 @@ public class CodeFormatter {
         modelNames = templateConfig.options["modelNames"] as? [String: String] ?? [:]
         enumNames = templateConfig.options["enumNames"] as? [String: String] ?? [:]
         propertyNames = templateConfig.options["propertyNames"] as? [String: String] ?? [:]
+        dateTimeType = templateConfig.getStringOption("dateTimeType") ?? ""
     }
 
     var disallowedNames: [String] {
