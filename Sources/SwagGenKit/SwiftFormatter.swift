@@ -145,16 +145,22 @@ public class SwiftFormatter: CodeFormatter {
                 let typeString = getSchemaType(name: name, schema: additionalProperties, checkEnum: checkEnum)
                 return checkEnum ? "[String: \(enumValue ?? typeString)]" : typeString
             } else if schema.properties.isEmpty {
-                return "[String: Any]"
+                let anyType = templateConfig.getStringOption("anyType") ?? "Any"
+                return "[String: \(anyType)]"
             } else {
                 return escapeType(name.upperCamelCased())
             }
         case let .reference(reference):
             return getSchemaTypeName(reference.component)
-        case .group:
+        case let .group(groupSchema):
+            if groupSchema.schemas.count == 1, let singleGroupSchema = groupSchema.schemas.first {
+                //flatten group schemas with only one schema
+                return getSchemaType(name: name, schema: singleGroupSchema)
+            }
+
             return escapeType(name.upperCamelCased())
         case .any:
-            return "Any"
+            return templateConfig.getStringOption("anyType") ?? "Any"
         }
     }
 

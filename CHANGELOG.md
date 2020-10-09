@@ -2,8 +2,15 @@
 
 ## Next Version
 
+### Added
+- Support multiple authentication types per operation #222 @malteburkert
+
 ### Fixed
 - Fixed inline allOf group generation
+- Fixed property generation when there is only one group schema;  the first group schema type will be used as the type #217
+- Added `anyType` option that allows to override `Any` in models
+- Fixed date encoding formatter to conform to RFC3339
+- Fixed `.swift-version` to use Swift 5.2 instead of Swift 4.1 #246
 
 ## 4.3.1
 

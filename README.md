@@ -3,7 +3,6 @@
 ![Platforms](https://img.shields.io/badge/platforms-Linux%20%7C%20macOS-blue.svg?style=for-the-badge)
 [![SPM](https://img.shields.io/badge/spm-compatible-brightgreen.svg?style=for-the-badge)](https://swift.org/package-manager)
 [![Git Version](https://img.shields.io/github/release/yonaskolb/swaggen.svg?style=for-the-badge)](https://github.com/yonaskolb/SwagGen/releases)
-[![Build Status](https://img.shields.io/circleci/project/github/yonaskolb/SwagGen.svg?style=for-the-badge)](https://circleci.com/gh/yonaskolb/SwagGen)
 [![license](https://img.shields.io/github/license/yonaskolb/SwagGen.svg?style=for-the-badge)](https://github.com/yonaskolb/SwagGen/blob/master/LICENSE)
 
 SwagGen is a library and command line tool for parsing and generating code for [OpenAPI/Swagger 3.0](https://swagger.io/specification) specs, completely written in Swift.
@@ -142,7 +141,8 @@ safeArrayDecoding | filter out invalid items in array instead of throwing | `Boo
 safeOptionalDecoding | set invalid optionals to nil instead of throwing | `Bool` | false
 tagPrefix | prefix for all tags | `String` | null
 tagSuffix | suffix for all tags | `String` | null
-codableResponses | constrains all responses to be Codable | `Bool` | false
+codableResponses | constrains all responses to be `Codable` | `Bool` | false
+anyType | override `Any` with custom type | `String` | `Any`
 
 If writing your own Swift template there are a few types that are generated that you will need to provide typealias's for:
 
